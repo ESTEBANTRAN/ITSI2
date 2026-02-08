@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Redirect all requests to public folder
+RewriteCond %{REQUEST_URI} !^/ITSI/public/
+RewriteRule ^(.*)$ /ITSI/public/$1 [L,R=301]
+
+# If already in public folder, continue
+RewriteCond %{REQUEST_URI} ^/ITSI/public/
+RewriteRule ^(.*)$ public/index.php/$1 [L]

@@ -1,0 +1,168 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\UsuarioModel;
+
+class CuentaController extends BaseController
+{
+    protected $usuarioModel;
+
+    public function __construct()
+    {
+        $this->usuarioModel = new UsuarioModel();
+    }
+
+    public function configuracion()
+    {
+        if (!session('id')) {
+            return redirect()->to('/login');
+        }
+
+        $rol_id = session('rol_id');
+        
+        if ($rol_id == 1) {
+            // Estudiante
+            return view('cuenta/estudiante');
+        } elseif ($rol_id == 2 || $rol_id == 4) {
+            // Administrativo Bienestar o Super Administrador
+            return view('cuenta/administrador');
+        } else {
+            return redirect()->to('/login');
+        }
+    }
+
+    public function cambiarPassword()
+    {
+        if (!session('id')) {
+            return redirect()->to('/login');
+        }
+
+        $rules = [
+            'password_actual' => 'required',
+            'password_nuevo' => 'required|min_length[6]',
+            'password_confirmar' => 'required|matches[password_nuevo]'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Por favor corrija los errores en el formulario.');
+        }
+
+        $userId = session('id');
+        $passwordActual = $this->request->getPost('password_actual');
+        $passwordNuevo = $this->request->getPost('password_nuevo');
+
+        // Obtener usuario actual
+        $usuario = $this->usuarioModel->find($userId);
+
+        if (!$usuario) {
+            return redirect()->back()->with('error', 'Usuario no encontrado.');
+        }
+
+        // Verificar contraseña actual
+        if (!password_verify($passwordActual, $usuario['password_hash'])) {
+            return redirect()->back()->withInput()->with('error', 'La contraseña actual es incorrecta.');
+        }
+
+        // Actualizar contraseña
+        $data = [
+            'password_hash' => password_hash($passwordNuevo, PASSWORD_DEFAULT)
+        ];
+
+        if ($this->usuarioModel->update($userId, $data)) {
+            return redirect()->back()->with('success', 'Contraseña actualizada exitosamente.');
+        } else {
+            return redirect()->back()->withInput()->with('error', 'Error al actualizar la contraseña.');
+        }
+    }
+
+    public function configuracionNotificaciones()
+    {
+        if (!session('id')) {
+            return redirect()->to('/login');
+        }
+
+        $userId = session('id');
+        
+        $data = [
+            'notificaciones_email' => $this->request->getPost('notificaciones_email') ? 1 : 0,
+            'notificaciones_sms' => $this->request->getPost('notificaciones_sms') ? 1 : 0,
+            'notificaciones_push' => $this->request->getPost('notificaciones_push') ? 1 : 0
+        ];
+
+        if ($this->usuarioModel->update($userId, $data)) {
+            return redirect()->back()->with('success', 'Configuración de notificaciones actualizada.');
+        } else {
+            return redirect()->back()->with('error', 'Error al actualizar la configuración.');
+        }
+    }
+
+    public function eliminarCuenta()
+    {
+        if (!session('id')) {
+            return redirect()->to('/login');
+        }
+
+        $userId = session('id');
+        $password = $this->request->getPost('password_confirmar');
+
+        if (empty($password)) {
+            return redirect()->back()->with('error', 'Debe confirmar su contraseña para eliminar la cuenta.');
+        }
+
+        // Obtener usuario actual
+        $usuario = $this->usuarioModel->find($userId);
+
+        if (!$usuario) {
+            return redirect()->back()->with('error', 'Usuario no encontrado.');
+        }
+
+        // Verificar contraseña
+        if (!password_verify($password, $usuario['password_hash'])) {
+            return redirect()->back()->with('error', 'La contraseña es incorrecta.');
+        }
+
+        // Eliminar cuenta (soft delete)
+        if ($this->usuarioModel->delete($userId)) {
+            session()->destroy();
+            return redirect()->to('/login')->with('success', 'Su cuenta ha sido eliminada exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'Error al eliminar la cuenta.');
+        }
+    }
+
+    public function exportarDatos()
+    {
+        if (!session('id')) {
+            return redirect()->to('/login');
+        }
+
+        $userId = session('id');
+        $usuario = $this->usuarioModel->find($userId);
+
+        if (!$usuario) {
+            return redirect()->back()->with('error', 'Usuario no encontrado.');
+        }
+
+        // Crear archivo JSON con datos del usuario
+        $datosUsuario = [
+            'id' => $usuario['id'],
+            'nombre' => $usuario['nombre'],
+            'apellido' => $usuario['apellido'],
+            'cedula' => $usuario['cedula'],
+            'email' => $usuario['email'],
+            'telefono' => $usuario['telefono'],
+            'direccion' => $usuario['direccion'],
+            'carrera' => $usuario['carrera'],
+            'semestre' => $usuario['semestre'],
+            'fecha_exportacion' => date('Y-m-d H:i:s')
+        ];
+
+        $filename = 'datos_usuario_' . $userId . '_' . date('Y-m-d') . '.json';
+        
+        return $this->response
+            ->setContentType('application/json')
+            ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->setBody(json_encode($datosUsuario, JSON_PRETTY_PRINT));
+    }
+} 

@@ -1,0 +1,43 @@
+/* Estilos personalizados para el sidebar */
+.left-sidebar {
+    width: 300px !important; /* Aumentamos el ancho del sidebar de 270px a 300px */
+}
+
+/* Ajustamos el contenido principal para que no se superponga con el sidebar más ancho */
+.body-wrapper {
+    margin-left: 300px !important;
+}
+
+/* Mejoramos la visualización del texto en el menú */
+#sidebarnav .sidebar-link {
+    padding: 12px 15px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+/* Ajustamos el espacio para los íconos */
+#sidebarnav .sidebar-link i, 
+#sidebarnav .sidebar-link span:first-child {
+    margin-right: 10px;
+}
+
+/* Estilos específicos para el logo del Super Admin */
+.brand-logo .logo-img img {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    transition: transform 0.2s ease-in-out !important;
+}
+
+.brand-logo .logo-img:hover img {
+    transform: scale(1.05) !important;
+}
+
+/* Aseguramos que el texto del logo sea visible */
+.brand-logo .logo-img span {
+    font-weight: 700 !important;
+    color: #000 !important;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+}

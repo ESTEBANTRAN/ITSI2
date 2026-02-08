@@ -1,0 +1,19 @@
+ID,Estudiante,Cédula,Carrera,Categoría,Asunto,Prioridad,Estado,"Fecha Solicitud",Responsable,Descripción
+27,"estudiante estudiante",0003,,Económicas,qwewqeqw,Alta,Pendiente,"2025-08-20 18:32:35","Sin asignar",eqweqwewewewqewqeqwewqeq
+22,"estudiante estudiante",0003,,"Otro Asunto",SADSADASD,Urgente,Pendiente,"2025-08-20 18:27:02","Sin asignar",DSADSADSADASD
+21,"estudiante estudiante",0003,,Vivienda,SDSADAS,Urgente,Pendiente,"2025-08-20 18:26:46","Sin asignar",DSADADSADASD
+20,"estudiante estudiante",0003,,Técnicas,ASDASDSA,Baja,Pendiente,"2025-08-20 18:24:35","Sin asignar",DASDASDASDASDAS
+19,"estudiante estudiante",0003,,Académicas,ASDSADQWQE,Urgente,Pendiente,"2025-08-20 18:24:20","Sin asignar",QWEWQEQWEWQE
+26,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",Académicas,"Problema con horario de clases",Alta,Pendiente,"2025-08-20 13:31:53",admin,"Tengo un conflicto con el horario de mis clases de programaci¾n y necesito ayuda para reorganizarlo."
+25,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",Académicas,"Problema con horario de clases",Alta,Pendiente,"2025-08-20 13:29:41",admin,"Tengo un conflicto con el horario de mis clases de programaci¾n y necesito ayuda para reorganizarlo."
+24,"Ana Gomez",0987654321,,Económicas,"Necesito ayuda econ¾mica para materiales",Media,Pendiente,"2025-08-20 13:29:35",admin,"Mi situaci¾n econ¾mica es complicada y necesito ayuda para comprar libros y materiales de estudio para este semestre."
+8,"estebansito lolaso",01023123,"Desarrollo de Software",,"Problemas económicos",Urgente,"En Proceso","2025-07-28 02:36:32",admin,"Mi familia está pasando por dificultades económicas"
+6,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",,"Orientación académica",Media,Resuelta,"2025-07-26 02:36:32",admin,"Necesito orientación sobre mi carrera y opciones de especialización"
+2,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",,"Apoyo psicológico",Alta,Pendiente,"2024-10-05 11:00:00",Ana,"He estado pasando por momentos difíciles y necesito apoyo psicológico para continuar con mis estudios."
+4,"Ana López",1005183397,Administración,,"Dificultades académicas",Alta,Pendiente,"2024-08-15 16:45:00","Sin asignar","Tengo dificultades con matemáticas y necesito apoyo"
+5,"Carlos Ruiz",1005183398,"Marketing Digital y Comercio Electrónico",,"Problemas económicos",Urgente,"En Proceso","2024-08-10 12:20:00",María,"Mi familia está pasando por dificultades económicas"
+3,"Juan Pérez",1005183396,"Desarrollo de Software",,"Orientación académica",Media,Resuelta,"2024-08-05 14:30:00",María,"Necesito orientación sobre mi carrera y opciones de especialización"
+16,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",,"Actualizaci¾n de Datos",Baja,Pendiente,"2024-01-19 08:45:00","Sin asignar","CambiÚ de direcci¾n y necesito actualizar mis datos personales"
+14,"admin admin",0001,,,"Problema de Acceso",Alta,"En Proceso","2024-01-18 11:00:00","Sin asignar","No puedo iniciar sesi¾n en el sistema, me dice que mi usuario no existe"
+10,"ESTEBAN MAXIMILIANO AULESTIA ANDRADE",1005183395,"Desarrollo de Software",,"Problema con Beca AcadÚmica",Alta,Pendiente,"2024-01-15 10:30:00","Sin asignar","No puedo acceder a mi solicitud de beca, aparece un error en el sistema"
+15,"superadmin superAdminnnn",0004,,,"Consulta sobre PerÝodos",Media,Resuelta,"2024-01-13 13:30:00","Sin asignar","Quiero saber cußndo abre el pr¾ximo perÝodo de solicitudes"
