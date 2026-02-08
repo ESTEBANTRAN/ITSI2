@@ -201,7 +201,7 @@ class UsuarioGlobalModel extends Model
         
         // Construir la consulta base
         $builder = $this->db->table('usuarios');
-        $builder->select('usuarios.*, roles.nombre_rol as nombre_rol');
+        $builder->select('usuarios.*, roles.nombre as nombre_rol');
         $builder->join('roles', 'roles.id = usuarios.rol_id');
         
         // Aplicar búsqueda si se proporciona
@@ -212,7 +212,7 @@ class UsuarioGlobalModel extends Model
             $builder->orLike('usuarios.apellido', $search);
             $builder->orLike('usuarios.email', $search);
             $builder->orLike('usuarios.cedula', $search);
-            $builder->orLike('roles.nombre_rol', $search);
+            $builder->orLike('roles.nombre', $search);
             $builder->groupEnd();
         }
         
@@ -227,7 +227,7 @@ class UsuarioGlobalModel extends Model
             $totalQuery->orLike('usuarios.apellido', $search);
             $totalQuery->orLike('usuarios.email', $search);
             $totalQuery->orLike('usuarios.cedula', $search);
-            $totalQuery->orLike('roles.nombre_rol', $search);
+            $totalQuery->orLike('roles.nombre', $search);
             $totalQuery->groupEnd();
         }
         
@@ -260,7 +260,7 @@ class UsuarioGlobalModel extends Model
      */
     public function getTodosLosUsuariosConRoles()
     {
-        return $this->select('usuarios.*, roles.nombre_rol as nombre_rol')
+        return $this->select('usuarios.*, roles.nombre as nombre_rol')
                     ->join('roles', 'roles.id = usuarios.rol_id')
                     ->orderBy('usuarios.created_at', 'DESC')
                     ->findAll();

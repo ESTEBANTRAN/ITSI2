@@ -210,7 +210,7 @@ class GlobalAdminController extends BaseController
         try {
             // Obtener actividad reciente real de logs
             $logs = $this->db->table('logs')
-                ->select('nivel, accion, mensaje, fecha_creacion')
+                ->select('accion, tabla, datos, fecha_creacion')
                 ->orderBy('fecha_creacion', 'DESC')
                 ->limit(10)
                 ->get()
@@ -219,9 +219,9 @@ class GlobalAdminController extends BaseController
             $actividad = [];
             foreach ($logs as $log) {
                 $actividad[] = [
-                    'tipo' => $log['nivel'] == 'ERROR' ? 'danger' : ($log['nivel'] == 'WARNING' ? 'warning' : 'info'),
+                    'tipo' => 'info',
                     'titulo' => $log['accion'],
-                    'descripcion' => $log['mensaje'],
+                    'descripcion' => $log['tabla'] . (isset($log['datos']) ? ' - ' . substr($log['datos'], 0, 50) : ''),
                     'tiempo' => $this->tiempoTranscurrido($log['fecha_creacion'])
                 ];
             }
@@ -657,7 +657,7 @@ class GlobalAdminController extends BaseController
         try {
             // Obtener logs de la base de datos
             $logs = $this->db->table('logs')
-                ->select('id, usuario_id, nivel, accion, mensaje, ip, fecha_creacion')
+                ->select('id, id_usuario, accion, tabla, registro_id, datos, fecha_creacion')
                 ->orderBy('fecha_creacion', 'DESC')
                 ->limit(100)
                 ->get()

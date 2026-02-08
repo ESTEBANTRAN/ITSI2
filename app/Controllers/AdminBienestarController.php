@@ -4024,15 +4024,12 @@ class AdminBienestarController extends BaseController
         try {
             $usuario = $this->getUsuarioActual();
             $this->db->table('logs')->insert([
-                'usuario_id' => $usuario['id'],
+                'id_usuario' => $usuario['id'],
                 'accion' => $accion,
-                'tabla_afectada' => $tabla,
+                'tabla' => $tabla,
                 'registro_id' => $registroId,
-                'datos_anteriores' => null,
-                'datos_nuevos' => json_encode($datos),
-                'ip_origen' => $this->request->getIPAddress(),
-                'user_agent' => $this->request->getUserAgent(),
-                'fecha_accion' => date('Y-m-d H:i:s')
+                'datos' => json_encode($datos),
+                'fecha_creacion' => date('Y-m-d H:i:s')
             ]);
         } catch (\Exception $e) {
             log_message('error', 'Error logging action: ' . $e->getMessage());

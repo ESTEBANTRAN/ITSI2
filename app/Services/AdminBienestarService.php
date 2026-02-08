@@ -331,14 +331,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'actualizar_estado_ficha',
                 'tabla' => 'fichas_socioeconomicas',
                 'registro_id' => $fichaId,
-                'valores_anteriores' => json_encode(['estado' => 'anterior']),
-                'valores_nuevos' => json_encode(['estado' => $nuevoEstado]),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode(['estado_anterior' => 'anterior', 'estado_nuevo' => $nuevoEstado])
             ]);
 
             $this->db->transComplete();
@@ -385,14 +382,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'aprobar_solicitud_beca',
                 'tabla' => 'solicitudes_becas',
                 'registro_id' => $solicitudId,
-                'valores_anteriores' => json_encode(['estado' => 'Pendiente']),
-                'valores_nuevos' => json_encode(['estado' => 'Aprobada']),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode(['estado_anterior' => 'Pendiente', 'estado_nuevo' => 'Aprobada'])
             ]);
 
             $this->db->transComplete();
@@ -426,14 +420,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'rechazar_solicitud_beca',
                 'tabla' => 'solicitudes_becas',
                 'registro_id' => $solicitudId,
-                'valores_anteriores' => json_encode(['estado' => 'Pendiente']),
-                'valores_nuevos' => json_encode(['estado' => 'Rechazada', 'motivo' => $motivo]),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode(['estado_anterior' => 'Pendiente', 'estado_nuevo' => 'Rechazada', 'motivo' => $motivo])
             ]);
 
             $this->db->transComplete();
@@ -489,13 +480,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'crear_beca',
                 'tabla' => 'becas',
                 'registro_id' => $becaId,
-                'valores_nuevos' => json_encode($datos),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode($datos)
             ]);
 
             $this->db->transComplete();
@@ -561,14 +550,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'actualizar_beca',
                 'tabla' => 'becas',
                 'registro_id' => $becaId,
-                'valores_anteriores' => json_encode($valoresAnteriores),
-                'valores_nuevos' => json_encode($datos),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode(['anteriores' => $valoresAnteriores, 'nuevos' => $datos])
             ]);
 
             $this->db->transComplete();
@@ -603,13 +589,11 @@ class AdminBienestarService
 
             // Registrar en logs
             $this->db->table('logs')->insert([
-                'usuario_id' => $adminId,
+                'id_usuario' => $adminId,
                 'accion' => 'crear_periodo_academico',
                 'tabla' => 'periodos_academicos',
                 'registro_id' => $periodoId,
-                'valores_nuevos' => json_encode($datos),
-                'fecha' => date('Y-m-d H:i:s'),
-                'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
+                'datos' => json_encode($datos)
             ]);
 
             $this->db->transComplete();
